@@ -1,5 +1,4 @@
 #![no_main]
-// If you want to try std support, also update the guest Cargo.toml file
 use risc0_zkvm::guest::env;
 
 use rustreexo::accumulator::node_hash::NodeHash;
@@ -10,7 +9,7 @@ risc0_zkvm::guest::entry!(main);
 pub fn main() {
     let proof: Proof = env::read();
     let acc: Stump = env::read();
-    println!("{acc:?}");
+    
     // TODO: Pass in the leaf data and build the hash here?
     let leaf_hash: NodeHash = env::read();
     acc.verify(&proof, &[leaf_hash]).unwrap();

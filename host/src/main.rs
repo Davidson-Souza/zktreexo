@@ -16,12 +16,7 @@ use std::{path::PathBuf, str::FromStr};
 use clap::Parser;
 use hex::FromHex;
 use log::info;
-use risc0_zkvm::{
-    default_prover,
-    guest::sha::Impl,
-    sha::{Digest, Sha256},
-    ExecutorEnv, Receipt,
-};
+use risc0_zkvm::{default_prover, sha::Digest, ExecutorEnv, Receipt};
 use rustreexo::accumulator::{node_hash::NodeHash, proof::Proof, stump::Stump};
 use serde::Deserialize;
 use serde::Serialize;
@@ -64,6 +59,7 @@ fn main() -> anyhow::Result<()> {
                 "Your id is {}, you'll need this to verify the proof",
                 Digest::from(GUEST_CODE_FOR_ZK_PROOF_ID)
             );
+
             let leaf_hash = NodeHash::from_str(&leaf_hash)?;
             let env = ExecutorEnv::builder()
                 .write(&proof)?
